@@ -1,286 +1,419 @@
 <!DOCTYPE html>
-<html lang="id" class="scroll-smooth">
+<html lang="id" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profil Perusahaan - [Nama Perusahaan Anda]</title>
-    
-    <!-- Tailwind CSS via CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts: Inter -->
+    <title>Rasyifa Nusantara Group | Jasa, Pertanian, Peternakan, Industri</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" xintegrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    <!-- Font Awesome 4.7.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
-        /* Menggunakan font Inter sebagai default */
-        body {
-            font-family: 'Inter', sans-serif;
+        /* Custom styles with new green theme */
+        :root {
+            --rng-green: #1E5631; /* Deep, professional green */
+            --rng-light-green: #A4D0A4;
+            --bs-primary: var(--rng-green);
+            --bs-primary-rgb: 30, 86, 49;
+            --bs-link-color: var(--rng-green);
+            --bs-link-hover-color: #153d23;
         }
-        /* Style untuk link navigasi aktif */
-        .nav-active {
-            color: #3b82f6; /* biru-500 */
-            font-weight: 600;
+
+        [data-bs-theme="dark"] {
+             --bs-primary: #4CAF50; /* A brighter green for dark mode */
+             --bs-primary-rgb: 76, 175, 80;
+             --bs-link-color: var(--bs-primary);
+             --bs-link-hover-color: #6ed472;
+             --bs-body-bg: #121212;
+             --bs-body-color: #e0e0e0;
+             --bs-tertiary-bg: #1e1e1e;
+        }
+
+        html {
+             scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .fw-bold.text-primary {
+            color: var(--bs-primary) !important;
+        }
+
+        .hero-section {
+            position: relative;
+            height: 80vh;
+            background-image: url('https://image.pollinations.ai/prompt/futuristic%20sustainable%20agriculture%20in%20Indonesia,%20high%20tech%20farm,%20vibrant,%20cinematic%20lighting&model=flux&nologo=true');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .hero-section .container {
+            position: relative;
+            z-index: 2;
+        }
+
+        .cta-section {
+            background: linear-gradient(45deg, var(--rng-green), #28a745);
+            padding: 5rem 0;
+            color: white;
+        }
+
+        /* Styling Timeline */
+        .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
+        .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--bs-border-color); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
+        .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
+        .timeline-container.left { left: 0; }
+        .timeline-container.right { left: 50%; }
+        
+        .timeline-icon {
+            position: absolute;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background-color: var(--bs-primary);
+            color: white;
+            border-radius: 50%;
+            border: 4px solid var(--bs-body-bg);
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .timeline-content {
+            padding: 20px 30px;
+            background-color: var(--bs-tertiary-bg);
+            position: relative;
+            border-radius: 8px;
+            box-shadow: var(--bs-box-shadow-sm);
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.4s ease;
+        }
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--bs-box-shadow-lg) !important;
+        }
+        .timeline-content.is-visible { opacity: 1; transform: translateY(0); }
+        
+        .partner-logo { max-height: 60px; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; }
+        .partner-logo:hover { filter: grayscale(0%); opacity: 1; }
+        [data-bs-theme="dark"] .partner-logo { filter: grayscale(100%) invert(1); }
+        [data-bs-theme="dark"] .partner-logo:hover { filter: grayscale(0%) invert(0); }
+        .progress-bar { width: 0; transition: width 1.5s ease-out; }
+        .animated-element { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animated-element.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Perbaikan Responsivitas */
+        @media screen and (max-width: 768px) {
+            /* Kecilkan ukuran judul di mobile */
+            .display-4 { font-size: 2.5rem; }
+            .display-5 { font-size: 2.2rem; }
+            .display-6 { font-size: 1.8rem; }
+            
+            /* Ubah timeline menjadi satu kolom */
+            .timeline::after { left: 25px; }
+            .timeline-container { 
+                width: 100%; 
+                padding-left: 70px; 
+                padding-right: 15px; 
+            }
+            .timeline-container.left, .timeline-container.right { left: 0%; }
+            .timeline-icon {
+                left: 25px;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50 text-gray-800">
+<body>
 
-    <!-- Header / Navbar -->
-    <header id="header" class="bg-white/80 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <!-- Logo -->
-            <a href="#" class="text-2xl font-bold text-gray-900">
-                Logo<span class="text-blue-500">Perusahaan</span>
-            </a>
-            
-            <!-- Navigasi Desktop -->
-            <nav class="hidden md:flex space-x-8 items-center">
-                <a href="#beranda" class="text-gray-600 hover:text-blue-500 transition duration-300 nav-link">Beranda</a>
-                <a href="#tentang" class="text-gray-600 hover:text-blue-500 transition duration-300 nav-link">Tentang Kami</a>
-                <a href="#layanan" class="text-gray-600 hover:text-blue-500 transition duration-300 nav-link">Layanan</a>
-                <a href="#portofolio" class="text-gray-600 hover:text-blue-500 transition duration-300 nav-link">Portofolio</a>
-                <a href="#kontak" class="text-gray-600 hover:text-blue-500 transition duration-300 nav-link">Kontak</a>
-            </nav>
-            
-            <a href="#kontak" class="hidden md:block bg-blue-500 text-white px-6 py-2 rounded-full hover:bg-blue-600 transition duration-300">
-                Hubungi Kami
-            </a>
-
-            <!-- Tombol Menu Mobile -->
-            <button id="mobile-menu-button" class="md:hidden">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-            </button>
-        </div>
-
-        <!-- Navigasi Mobile -->
-        <div id="mobile-menu" class="hidden md:hidden px-6 pt-2 pb-4">
-            <a href="#beranda" class="block py-2 text-gray-600 hover:text-blue-500 nav-link">Beranda</a>
-            <a href="#tentang" class="block py-2 text-gray-600 hover:text-blue-500 nav-link">Tentang Kami</a>
-            <a href="#layanan" class="block py-2 text-gray-600 hover:text-blue-500 nav-link">Layanan</a>
-            <a href="#portofolio" class="block py-2 text-gray-600 hover:text-blue-500 nav-link">Portofolio</a>
-            <a href="#kontak" class="block py-2 text-gray-600 hover:text-blue-500 nav-link">Kontak</a>
-            <a href="#kontak" class="block mt-4 bg-blue-500 text-white text-center px-6 py-2 rounded-full hover:bg-blue-600">Hubungi Kami</a>
-        </div>
+    <!-- Header -->
+    <header>
+        <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top">
+            <div class="container">
+                <!-- === PERUBAHAN DI SINI: MENAMBAHKAN LOGO === -->
+                <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="#">
+                    <img src="logo.png" alt="Rasyifa Nusantara Group Logo" style="height: 50px;" class="me-2">
+                    Rasyifa Nusantara Group
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="main-nav">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <li class="nav-item"><a class="nav-link" href="#home">Beranda</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#about">Tentang</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#services">Layanan</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#team">Tim Kami</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonial</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Kontak</a></li>
+                    </ul>
+                    <button id="theme-toggle" class="btn btn-outline-secondary ms-lg-3 mt-2 mt-lg-0">
+                        <i class="fa fa-moon-o"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
     </header>
 
+    <!-- Floating Buttons -->
+    <a href="https://wa.me/62895331383414" target="_blank" class="btn btn-success btn-lg rounded-circle position-fixed z-3 shadow-lg" style="width: 60px; height: 60px; bottom: 1.7rem; left: 1.5rem; display: flex; align-items: center; justify-content: center;">
+        <i class="fa fa-whatsapp fs-3"></i>
+    </a>
+    <button id="back-to-top" class="btn btn-primary btn-lg rounded-circle position-fixed z-3 shadow-lg d-none" style="width: 50px; height: 50px; bottom: 1.5rem; right: 1.5rem; display: flex; align-items: center; justify-content: center;">
+        <i class="fa fa-arrow-up"></i>
+    </button>
+
     <main>
-        <!-- Bagian Beranda (Hero Section) -->
-        <section id="beranda" class="container mx-auto px-6 py-20 md:py-32">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight mb-4">
-                        Membawa <span class="text-blue-500">Inovasi Digital</span> untuk Bisnis Anda
-                    </h1>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Kami adalah partner terpercaya dalam menyediakan solusi teknologi terdepan yang mendorong pertumbuhan dan efisiensi bisnis Anda di era digital.
-                    </p>
-                    <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="#layanan" class="bg-blue-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-blue-600 transition duration-300">
-                            Lihat Layanan
-                        </a>
-                        <a href="#kontak" class="bg-gray-200 text-gray-800 px-8 py-3 rounded-full font-semibold hover:bg-gray-300 transition duration-300">
-                            Konsultasi Gratis
-                        </a>
-                    </div>
+        <!-- Hero Section -->
+        <section id="home" class="hero-section">
+            <div class="container">
+                <h1 class="display-4 fw-bold mb-3">Inovasi Berkelanjutan untuk Kemajuan Nusantara</h1>
+                <p class="lead mb-4 col-lg-8 mx-auto">Mengintegrasikan Jasa, Pertanian, Peternakan, dan Industri untuk masa depan yang lebih baik.</p>
+                <a href="#services" class="btn btn-primary btn-lg rounded-pill px-4 py-2">Jelajahi Layanan Kami</a>
+            </div>
+        </section>
+
+        <!-- About & Timeline Section -->
+        <section id="about" class="py-5 bg-body">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Perjalanan Kami</h2>
+                    <p class="lead col-lg-7 mx-auto">Kualitas, inovasi, dan pertumbuhan berkelanjutan adalah pilar yang kami bangun sejak awal.</p>
                 </div>
-                <div>
-                    <img src="https://placehold.co/600x400/e2e8f0/4a5568?text=Gambar+Hero" alt="Ilustrasi Tim Bekerja" class="rounded-lg shadow-xl w-full">
+                <div class="timeline">
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-rocket"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2019 - Awal Mula</h3><p class="small">Rasyifa Nusantara Group didirikan dengan visi untuk menjadi pemain kunci dalam sektor jasa dan perdagangan.</p></div></div>
+                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-leaf"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2021 - Ekspansi Pertanian</h3><p class="small">Memasuki sektor pertanian dengan menerapkan teknologi modern untuk meningkatkan efisiensi dan hasil panen.</p></div></div>
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-industry"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2023 - Diversifikasi Usaha</h3><p class="small">Melakukan diversifikasi ke bidang peternakan dan industri pengolahan, menciptakan sinergi antar unit bisnis.</p></div></div>
+                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-desktop"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2024 - Digitalisasi Layanan</h3><p class="small">Meluncurkan platform digital terpadu untuk memudahkan akses layanan dan informasi bagi klien.</p></div></div>
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-globe"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2025 - Visi Ekspansi Global</h3><p class="small">Merencanakan ekspansi pasar nasional dan menjajaki kemitraan strategis global untuk membawa produk Indonesia ke dunia.</p></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Bagian Tentang Kami -->
-        <section id="tentang" class="bg-white py-20 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Tentang Kami</h2>
-                    <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">Mengenal lebih dekat siapa kami, visi, misi, dan nilai-nilai yang kami anut dalam menjalankan bisnis.</p>
+        <!-- Vision & Mission Section -->
+        <section id="vision-mission" class="py-5">
+            <div class="container">
+                <div class="row g-5 align-items-center">
+                    <div class="col-lg-6 animated-element">
+                        <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-eye fs-1 text-primary me-3"></i>
+                            <h2 class="display-6 fw-bold mb-0">Visi Kami</h2>
+                        </div>
+                        <p class="lead">Menjadi perusahaan terdepan yang mengintegrasikan sektor jasa, agribisnis, dan industri secara berkelanjutan untuk mendorong kemandirian dan kemajuan ekonomi Nusantara.</p>
+                    </div>
+                    <div class="col-lg-6 animated-element">
+                         <div class="d-flex align-items-center mb-3">
+                            <i class="fa fa-flag fs-1 text-primary me-3"></i>
+                            <h2 class="display-6 fw-bold mb-0">Misi Kami</h2>
+                        </div>
+                        <ul class="list-unstyled lead">
+                            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i>Menyediakan solusi inovatif dan berkualitas di setiap unit bisnis.</li>
+                            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i>Mengembangkan sumber daya manusia yang kompeten dan berintegritas.</li>
+                            <li class="mb-2"><i class="fa fa-check-circle text-success me-2"></i>Membangun kemitraan strategis yang saling menguntungkan.</li>
+                        </ul>
+                    </div>
                 </div>
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 md:order-1">
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Visi & Misi Kami</h3>
-                        <p class="text-gray-600 mb-4">
-                            <strong>Visi:</strong> Menjadi perusahaan teknologi terkemuka di Indonesia yang memberikan dampak positif melalui inovasi dan solusi digital yang unggul.
-                        </p>
-                        <p class="text-gray-600 mb-6">
-                           <strong>Misi:</strong> Memberikan layanan berkualitas tinggi, membangun hubungan jangka panjang dengan klien, serta menciptakan lingkungan kerja yang suportif dan inovatif bagi tim kami. Kami berkomitmen untuk memahami kebutuhan unik setiap klien dan memberikan solusi yang tepat sasaran.
-                        </p>
-                        <div class="flex space-x-8">
-                            <div>
-                                <p class="text-3xl font-bold text-blue-500">10+</p>
-                                <p class="text-gray-500">Tahun Pengalaman</p>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-5 bg-body">
+            <div class="container">
+                <div class="text-center mb-5"><h2 class="display-5 fw-bold text-primary">Sektor Unggulan Kami</h2><p class="lead col-lg-7 mx-auto">Kami menyediakan solusi terintegrasi di empat pilar utama.</p></div>
+                <ul class="nav nav-pills justify-content-center mb-4" id="service-tabs" role="tablist">
+                    <li class="nav-item" role="presentation"><button class="nav-link active" id="jasa-tab" data-bs-toggle="pill" data-bs-target="#jasa-pane" type="button" role="tab">Jasa</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="pertanian-tab" data-bs-toggle="pill" data-bs-target="#pertanian-pane" type="button" role="tab">Pertanian</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="peternakan-tab" data-bs-toggle="pill" data-bs-target="#peternakan-pane" type="button" role="tab">Peternakan</button></li>
+                    <li class="nav-item" role="presentation"><button class="nav-link" id="industri-tab" data-bs-toggle="pill" data-bs-target="#industri-pane" type="button" role="tab">Industri</button></li>
+                </ul>
+                <div class="tab-content" id="service-tabs-content">
+                    <div class="tab-pane fade show active p-4 rounded-3 bg-body shadow-sm" id="jasa-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/professional%20business%20consultation%20in%20a%20modern%20office,%20diverse%20team&model=flux&nologo=true" class="img-fluid rounded" alt="Layanan Jasa Profesional"></div><div class="col-md-8"><h3 class="fw-bold text-primary">Konsultasi dan Jasa Profesional</h3><p>Kami menyediakan berbagai layanan jasa, termasuk konsultasi bisnis, manajemen proyek, dan solusi digital untuk membantu klien kami mencapai tujuan mereka.</p></div></div></div>
+                    <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="pertanian-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/smart%20farming%20with%20drones%20watering%20lush%20green%20paddy%20field,%20innovation&model=flux&nologo=true" class="img-fluid rounded" alt="Agrikultur Inovatif"></div><div class="col-md-8"><h3 class="fw-bold text-success">Agrikultur Inovatif</h3><p>Dengan fokus pada pertanian cerdas (smart farming), kami mengelola lahan pertanian untuk menghasilkan komoditas berkualitas tinggi dan ramah lingkungan.</p></div></div></div>
+                    <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="peternakan-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/healthy%20cows%20and%20goats%20on%20a%20modern%20clean%20farm,%20green%20pasture&model=flux&nologo=true" class="img-fluid rounded" alt="Peternakan Terpadu"></div><div class="col-md-8"><h3 class="fw-bold text-warning">Peternakan Terpadu</h3><p>Unit peternakan kami berfokus pada pembibitan dan penggemukan ternak unggul dengan menerapkan standar kesejahteraan hewan yang tinggi.</p></div></div></div>
+                    <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="industri-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/clean%20modern%20food%20processing%20facility,%20stainless%20steel%20machinery&model=flux&nologo=true" class="img-fluid rounded" alt="Industri Pengolahan"></div><div class="col-md-8"><h3 class="fw-bold text-info">Industri Pengolahan Hilir</h3><p>Kami mengolah hasil pertanian dan peternakan menjadi produk bernilai tambah, dilengkapi dengan teknologi modern untuk memastikan kualitas produk akhir.</p></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Progress & Satisfaction Section -->
+        <section id="progress" class="py-5">
+             <div class="container">
+                <div class="text-center mb-5"><h2 class="display-5 fw-bold text-primary">Komitmen pada Kualitas</h2><p class="lead col-lg-7 mx-auto">Kami mengukur kesuksesan melalui hasil nyata dan kepuasan klien yang konsisten.</p></div>
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-8"><div class="mb-4"><div class="d-flex justify-content-between mb-1"><span class="fw-semibold">Penyelesaian Proyek Tepat Waktu</span><span class="fw-bold text-primary animated-value" data-value="95">0%</span></div><div class="progress" role="progressbar" style="height: 20px;"><div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" data-width="95"></div></div></div><div class="mb-4"><div class="d-flex justify-content-between mb-1"><span class="fw-semibold">Peningkatan Efisiensi Operasional Klien</span><span class="fw-bold text-success animated-value" data-value="85">0%</span></div><div class="progress" role="progressbar" style="height: 20px;"><div class="progress-bar bg-success progress-bar-striped progress-bar-animated" data-width="85"></div></div></div><div><div class="d-flex justify-content-between mb-1"><span class="fw-semibold">Inovasi & Implementasi Teknologi</span><span class="fw-bold text-warning animated-value" data-value="90">0%</span></div><div class="progress" role="progressbar" style="height: 20px;"><div class="progress-bar bg-warning progress-bar-striped progress-bar-animated" data-width="90"></div></div></div></div>
+                    <div class="col-lg-4 text-center"><div class="card bg-primary-subtle border-0 shadow-sm p-4"><p class="fs-1 fw-bolder text-primary mb-0 counter" data-target="98">0</p><p class="fs-5 fw-semibold mb-0">Kepuasan Pelanggan (%)</p><div class="text-warning mt-2"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></div></div></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Team Section -->
+        <section id="team" class="py-5 bg-body">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Tim Profesional Kami</h2>
+                    <p class="lead col-lg-7 mx-auto">Figur-figur berdedikasi di balik kesuksesan Rasyifa Nusantara Group.</p>
+                </div>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-6 col-lg-3 animated-element">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                             <img src="https://image.pollinations.ai/prompt/photo%20of%20a%20confident%20male%20CEO%20from%20Indonesia,%20professional%20attire&model=flux&nologo=true" class="card-img-top" alt="CEO">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Rasyid Alamsyah</h5>
+                                <p class="card-text text-primary">Chief Executive Officer</p>
                             </div>
-                            <div>
-                                <p class="text-3xl font-bold text-blue-500">150+</p>
-                                <p class="text-gray-500">Projek Selesai</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 animated-element">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                             <img src="https://image.pollinations.ai/prompt/photo%20of%20a%20professional%20female%20COO%20from%20Indonesia,%20business%20suit&model=flux&nologo=true" class="card-img-top" alt="COO">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Syafira Putri</h5>
+                                <p class="card-text text-primary">Chief Operating Officer</p>
                             </div>
-                             <div>
-                                <p class="text-3xl font-bold text-blue-500">50+</p>
-                                <p class="text-gray-500">Klien Puas</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3 animated-element">
+                        <div class="card text-center border-0 shadow-sm h-100">
+                             <img src="https://image.pollinations.ai/prompt/photo%20of%20a%20male%20head%20of%20agribusiness%20from%20Indonesia,%20outdoors,%20friendly%20smile&model=flux&nologo=true" class="card-img-top" alt="Head of Agribusiness">
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold">Nusantara Bakti</h5>
+                                <p class="card-text text-primary">Kepala Divisi Agribisnis</p>
                             </div>
                         </div>
                     </div>
-                     <div class="order-1 md:order-2">
-                        <!-- Video YouTube Responsif -->
-                        <div class="aspect-w-16 aspect-h-9 w-full rounded-lg shadow-xl overflow-hidden">
-                            <!--
-                                CARA MENGGANTI VIDEO:
-                                1. Buka video YouTube yang Anda inginkan.
-                                2. Klik "Share" (Bagikan), lalu pilih "Embed" (Sematkan).
-                                3. Salin HANYA URL dari dalam atribut 'src'. Contoh: "https://www.youtube.com/embed/VIDEO_ID_ANDA"
-                                4. Ganti URL di bawah ini dengan URL yang sudah Anda salin.
-                            -->
-                            <iframe 
-                                class="w-full h-full" 
-                                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>
-                        </div>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Bagian Layanan -->
-        <section id="layanan" class="py-20 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Layanan Unggulan Kami</h2>
-                    <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">Solusi komprehensif untuk memenuhi semua kebutuhan digital dan teknologi bisnis Anda.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Kartu Layanan 1 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <div class="bg-blue-100 text-blue-500 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Pengembangan Web</h3>
-                        <p class="text-gray-600">Membangun situs web modern, responsif, dan cepat, mulai dari landing page hingga aplikasi web kompleks.</p>
-                    </div>
-                    <!-- Kartu Layanan 2 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <div class="bg-blue-100 text-blue-500 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">Aplikasi Mobile</h3>
-                        <p class="text-gray-600">Merancang dan mengembangkan aplikasi iOS dan Android yang intuitif dan fungsional untuk kebutuhan bisnis Anda.</p>
-                    </div>
-                    <!-- Kartu Layanan 3 -->
-                    <div class="bg-white p-8 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300">
-                        <div class="bg-blue-100 text-blue-500 rounded-full w-16 h-16 flex items-center justify-center mb-6">
-                            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"></path></svg>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-900 mb-3">UI/UX Desain</h3>
-                        <p class="text-gray-600">Menciptakan desain antarmuka yang menarik dan pengalaman pengguna yang mulus untuk produk digital Anda.</p>
-                    </div>
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5"><h2 class="display-5 fw-bold text-primary">Apa Kata Mereka?</h2><p class="lead col-lg-7 mx-auto">Kepercayaan klien adalah aset terbesar kami. Simak pengalaman mereka bekerja sama dengan kami.</p></div>
+                <div class="row g-4">
+                    <div class="col-lg-4"><div class="card h-100 shadow-sm border-0"><div class="card-body"><div class="d-flex mb-3"><img src="https://image.pollinations.ai/prompt/professional%20Indonesian%20businessman%20portrait&model=flux&nologo=true" class="rounded-circle me-3" width="60" height="60" alt="Budi Santoso"><div><h5 class="card-title mb-0">Budi Santoso</h5><small class="text-muted">CEO, Maju Jaya Farm</small></div></div><p class="card-text">"Tim Rasyifa Nusantara Group benar-benar profesional. Mereka tidak hanya memberikan solusi, tetapi juga bimbingan yang komprehensif untuk agribisnis kami."</p></div></div></div>
+                    <div class="col-lg-4"><div class="card h-100 shadow-sm border-0"><div class="card-body"><div class="d-flex mb-3"><img src="https://image.pollinations.ai/prompt/professional%20Indonesian%20businesswoman%20portrait&model=flux&nologo=true" class="rounded-circle me-3" width="60" height="60" alt="Citra Lestari"><div><h5 class="card-title mb-0">Citra Lestari</h5><small class="text-muted">Manajer Operasional, Pangan Sejahtera</small></div></div><p class="card-text">"Layanan konsultasi mereka membuka wawasan baru bagi kami. Efisiensi produksi kami meningkat secara signifikan setelah menerapkan saran dari Rasyifa Group."</p></div></div></div>
+                    <div class="col-lg-4"><div class="card h-100 shadow-sm border-0"><div class="card-body"><div class="d-flex mb-3"><img src="https://image.pollinations.ai/prompt/happy%20Indonesian%20factory%20owner%20portrait&model=flux&nologo=true" class="rounded-circle me-3" width="60" height="60" alt="Ahmad Subarjo"><div><h5 class="card-title mb-0">Ahmad Subarjo</h5><small class="text-muted">Pemilik, Industri Kreatif Lokal</small></div></div><p class="card-text">"Kerja sama yang luar biasa! Mereka sangat memahami kebutuhan industri kami dan memberikan solusi yang relevan dan mudah diimplementasikan."</p></div></div></div>
                 </div>
             </div>
         </section>
 
-        <!-- Bagian Portofolio -->
-        <section id="portofolio" class="bg-white py-20 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Portofolio Kami</h2>
-                    <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">Beberapa karya terbaik yang telah kami selesaikan untuk klien dari berbagai industri.</p>
-                </div>
-                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <!-- Item Portofolio 1 -->
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/600x400/3b82f6/ffffff?text=Projek+A" alt="Portofolio 1" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <h3 class="text-white text-xl font-bold">Website E-commerce</h3>
-                            <p class="text-gray-200 mt-2">Platform belanja online dengan fitur lengkap.</p>
-                        </div>
-                    </div>
-                    <!-- Item Portofolio 2 -->
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/600x400/10b981/ffffff?text=Projek+B" alt="Portofolio 2" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <h3 class="text-white text-xl font-bold">Aplikasi Finansial</h3>
-                            <p class="text-gray-200 mt-2">Aplikasi mobile untuk manajemen keuangan personal.</p>
-                        </div>
-                    </div>
-                    <!-- Item Portofolio 3 -->
-                    <div class="group relative overflow-hidden rounded-lg shadow-lg">
-                        <img src="https://placehold.co/600x400/f59e0b/ffffff?text=Projek+C" alt="Portofolio 3" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110">
-                        <div class="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-end p-6 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                            <h3 class="text-white text-xl font-bold">Sistem Manajemen Sekolah</h3>
-                            <p class="text-gray-200 mt-2">Solusi terintegrasi untuk administrasi sekolah.</p>
-                        </div>
-                    </div>
+        <!-- Partners Section -->
+        <section id="partners" class="py-5 bg-body">
+            <div class="container">
+                <div class="text-center mb-5"><h2 class="fw-bold text-primary">Dipercaya oleh</h2></div>
+                <div class="row g-4 align-items-center justify-content-center">
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/google.com" class="partner-logo" alt="Partner Google"></div>
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/microsoft.com" class="partner-logo" alt="Partner Microsoft"></div>
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/ibm.com" class="partner-logo" alt="Partner IBM"></div>
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/oracle.com" class="partner-logo" alt="Partner Oracle"></div>
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/amazon.com" class="partner-logo" alt="Partner Amazon"></div>
+                    <div class="col-6 col-md-4 col-lg-2 text-center"><img src="https://logo.clearbit.com/cisco.com" class="partner-logo" alt="Partner Cisco"></div>
                 </div>
             </div>
         </section>
+        
+        <!-- Call to Action Section -->
+        <section id="cta" class="cta-section">
+            <div class="container text-center">
+                <h2 class="display-5 fw-bold mb-3">Siap Mengembangkan Bisnis Anda?</h2>
+                <p class="lead mb-4 col-lg-8 mx-auto">Mari diskusikan bagaimana Rasyifa Nusantara Group dapat membantu mewujudkan visi dan target bisnis Anda. Hubungi kami untuk konsultasi awal tanpa biaya.</p>
+                <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-primary">Mulai Kolaborasi</a>
+            </div>
+        </section>
 
-        <!-- Bagian Kontak -->
-        <section id="kontak" class="py-20 md:py-24">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900">Hubungi Kami</h2>
-                    <p class="text-lg text-gray-600 mt-4 max-w-3xl mx-auto">Siap untuk memulai proyek Anda? Jangan ragu untuk menghubungi kami melalui formulir di bawah ini.</p>
+        <!-- Contact Section with Formspree -->
+        <section id="contact" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="display-5 fw-bold text-primary">Hubungi Kami</h2>
+                    <p class="lead col-lg-7 mx-auto">Kami siap mendengar dari Anda. Kirimkan pesan atau hubungi kami melalui detail di bawah.</p>
                 </div>
-                <div class="max-w-4xl mx-auto bg-white p-8 md:p-12 rounded-lg shadow-xl">
-                    <div class="grid md:grid-cols-2 gap-12">
-                        <!-- Info Kontak -->
-                        <div>
-                            <h3 class="text-2xl font-bold text-gray-900 mb-6">Informasi Kontak</h3>
-                            <div class="space-y-6">
-                                <div class="flex items-start space-x-4">
-                                    <div class="bg-blue-100 text-blue-500 rounded-full p-3 mt-1">
-                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800">Alamat</h4>
-                                        <p class="text-gray-600">[Jalan Perusahaan No. 123, Kota, Kode Pos]</p>
-                                    </div>
+                <div class="row g-5">
+                    <div class="col-lg-7">
+                        <div class="card p-4 shadow-sm border-0">
+                            <h3 class="fw-bold text-primary mb-4">Kirimkan Pesan</h3>
+                            <form action="https://formspree.io/f/YOUR_UNIQUE_ID" method="POST">
+                                <div class="mb-3">
+                                    <label for="name" class="form-label">Nama Lengkap</label>
+                                    <input type="text" id="name" name="name" class="form-control" required>
                                 </div>
-                                <div class="flex items-start space-x-4">
-                                     <div class="bg-blue-100 text-blue-500 rounded-full p-3 mt-1">
-                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800">Email</h4>
-                                        <p class="text-gray-600">kontak@[namaperusahaan].com</p>
-                                    </div>
+                                <div class="mb-3">
+                                    <label for="email" class="form-label">Alamat Email</label>
+                                    <input type="email" id="email" name="email" class="form-control" required>
                                 </div>
-                                <div class="flex items-start space-x-4">
-                                     <div class="bg-blue-100 text-blue-500 rounded-full p-3 mt-1">
-                                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
-                                    </div>
-                                    <div>
-                                        <h4 class="font-semibold text-gray-800">Telepon</h4>
-                                        <p class="text-gray-600">(021) 123-4567</p>
-                                    </div>
+                                <div class="mb-3">
+                                    <label for="subject" class="form-label">Subjek</label>
+                                    <input type="text" id="subject" name="subject" class="form-control" required>
                                 </div>
-                            </div>
+                                <div class="mb-3">
+                                    <label for="message" class="form-label">Pesan Anda</label>
+                                    <textarea id="message" name="message" rows="5" class="form-control" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-lg w-100">Kirim Pesan <i class="fa fa-paper-plane"></i></button>
+                            </form>
                         </div>
-                        <!-- Formulir Kontak -->
-                        <form>
-                            <div class="space-y-4">
+                    </div>
+                    <div class="col-lg-5">
+                        <div class="p-4 rounded-3 bg-body-tertiary h-100">
+                             <div class="d-flex align-items-start mb-4">
+                                <i class="fa fa-map-marker fs-2 text-primary me-4"></i>
                                 <div>
-                                    <label for="name" class="font-medium text-gray-700">Nama Lengkap</label>
-                                    <input type="text" id="name" name="name" class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <h4 class="fw-bold fs-5">Alamat Kantor</h4>
+                                    <p class="mb-0">Perumahan Bluru Permai Blok R22, RT. 03 / RW. 09, Jl. Ikan Dorang, Ds. Bluru Kidul, Kec. Sidoarjo, Kab. Sidoarjo</p>
                                 </div>
+                             </div>
+                             <div class="d-flex align-items-start mb-4">
+                                <i class="fa fa-phone fs-2 text-primary me-4"></i>
                                 <div>
-                                    <label for="email" class="font-medium text-gray-700">Alamat Email</label>
-                                    <input type="email" id="email" name="email" class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    <h4 class="fw-bold fs-5">Telepon</h4>
+                                    <p class="mb-0">0895-3313-83414<br>0812-4975-6831</p>
                                 </div>
+                             </div>
+                            <div class="d-flex align-items-start mb-4">
+                                <i class="fa fa-envelope fs-2 text-primary me-4"></i>
                                 <div>
-                                    <label for="message" class="font-medium text-gray-700">Pesan Anda</label>
-                                    <textarea id="message" name="message" rows="4" class="w-full mt-2 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                    <h4 class="fw-bold fs-5">Email</h4>
+                                    <p class="mb-0">rng@rasyifanusantaragroup.com</p>
                                 </div>
-                                <button type="submit" class="w-full bg-blue-500 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300">
-                                    Kirim Pesan
-                                </button>
-                            </div>
-                        </form>
+                             </div>
+                            <div class="d-flex align-items-start">
+                                <i class="fa fa-share-alt fs-2 text-primary me-4"></i>
+                                <div>
+                                    <h4 class="fw-bold fs-5">Media Sosial</h4>
+                                    <div class="mt-2">
+                                        <a href="https://instagram.com/rasyifa.nusantaragroup" target="_blank" class="text-decoration-none fs-4 me-3"><i class="fa fa-instagram"></i></a>
+                                        <a href="https://linkedin.com/company/rasyifa-nusantara-group" target="_blank" class="text-decoration-none fs-4 me-3"><i class="fa fa-linkedin-square"></i></a>
+                                        <a href="#" target="_blank" class="text-decoration-none fs-4 me-3"><i class="fa fa-facebook-square"></i></a>
+                                        <a href="#" target="_blank" class="text-decoration-none fs-4 me-3"><i class="fa fa-youtube-play"></i></a>
+                                        <a href="#" target="_blank" class="text-decoration-none fs-4"><i class="fa fa-twitter-square"></i></a>
+                                    </div>
+                                </div>
+                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -288,109 +421,76 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-900 text-white">
-        <div class="container mx-auto px-6 py-12">
-            <div class="grid md:grid-cols-4 gap-8">
-                <!-- Kolom 1: Tentang -->
-                <div>
-                    <h3 class="text-lg font-bold mb-4">LogoPerusahaan</h3>
-                    <p class="text-gray-400">Menyediakan solusi teknologi terdepan untuk mendorong pertumbuhan bisnis Anda.</p>
-                </div>
-                <!-- Kolom 2: Link Cepat -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Link Cepat</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#tentang" class="text-gray-400 hover:text-white">Tentang Kami</a></li>
-                        <li><a href="#layanan" class="text-gray-400 hover:text-white">Layanan</a></li>
-                        <li><a href="#portofolio" class="text-gray-400 hover:text-white">Portofolio</a></li>
-                        <li><a href="#kontak" class="text-gray-400 hover:text-white">Kontak</a></li>
-                    </ul>
-                </div>
-                <!-- Kolom 3: Layanan -->
-                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Layanan</h3>
-                    <ul class="space-y-2">
-                        <li><a href="#" class="text-gray-400 hover:text-white">Pengembangan Web</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">Aplikasi Mobile</a></li>
-                        <li><a href="#" class="text-gray-400 hover:text-white">UI/UX Desain</a></li>
-                    </ul>
-                </div>
-                <!-- Kolom 4: Social Media -->
-                <div>
-                    <h3 class="text-lg font-semibold mb-4">Ikuti Kami</h3>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" /></svg></a>
-                        <a href="#" class="text-gray-400 hover:text-white"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12.011c0 4.43 3.223 8.154 7.425 9.243.6.11.82-.26.82-.577 0-.285-.01-1.233-.015-2.224-3.13.68-3.79-1.34-3.79-1.34-.546-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.72.08-.72 1.2.08 1.83 1.23 1.83 1.23 1.07 1.83 2.81 1.3 3.5 1 .11-.78.42-1.3.76-1.6-2.66-.3-5.46-1.33-5.46-5.92 0-1.31.47-2.38 1.23-3.22-.12-.3-.54-1.52.12-3.18 0 0 1-.32 3.3 1.23.95-.26 1.98-.39 3-.4 1.02.01 2.05.14 3 .4 2.28-1.55 3.29-1.23 3.29-1.23.66 1.66.24 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.6-2.81 5.62-5.48 5.92.43.37.82 1.1.82 2.22 0 1.6-.02 3.18-.02 3.61 0 .32.22.69.83.57C18.777 20.165 22 16.44 22 12.011 22 6.477 17.523 2 12 2z" clip-rule="evenodd" /></svg></a>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-8 pt-8 border-t border-gray-700 text-center text-gray-400">
-                <p>&copy; 2024 [Nama Perusahaan Anda]. Hak Cipta Dilindungi.</p>
-            </div>
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-1">&copy; <span id="dynamic-year"></span> Rasyifa Nusantara Group. All Rights Reserved.</p>
+            <p class="mb-0 small">Didesain dengan <i class="fa fa-heart text-danger"></i> untuk kemajuan bersama.</p>
         </div>
     </footer>
 
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" xintegrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    
     <script>
-        // Script untuk toggle menu mobile
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
-
-        // Script untuk menandai navigasi aktif saat scroll
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('nav a.nav-link, #mobile-menu a.nav-link');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 100) { // offset 100px
-                    current = section.getAttribute('id');
-                }
+        document.addEventListener('DOMContentLoaded', function() {
+            // Theme Toggle
+            const htmlEl = document.documentElement;
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const sunIcon = '<i class="fa fa-sun-o"></i>';
+            const moonIcon = '<i class="fa fa-moon-o"></i>';
+            const setTheme = (theme) => {
+                htmlEl.setAttribute('data-bs-theme', theme);
+                themeToggleBtn.innerHTML = theme === 'dark' ? sunIcon : moonIcon;
+                localStorage.setItem('theme', theme);
+            };
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            setTheme(savedTheme);
+            themeToggleBtn.addEventListener('click', () => {
+                const currentTheme = htmlEl.getAttribute('data-bs-theme');
+                setTheme(currentTheme === 'dark' ? 'light' : 'dark');
             });
 
-            navLinks.forEach(link => {
-                link.classList.remove('nav-active');
-                if (link.getAttribute('href').includes(current)) {
-                    link.classList.add('nav-active');
-                }
+            // Back to Top button
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                backToTopButton.classList.toggle('d-none', window.pageYOffset <= 300);
             });
-        });
+            backToTopButton.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            
+            // Dynamic year in footer
+            document.getElementById('dynamic-year').textContent = new Date().getFullYear();
 
-        // Script untuk smooth scroll (meskipun sudah ada di CSS, ini untuk fallback)
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+            // Animate on Scroll
+            const animatedElements = document.querySelectorAll('.timeline-content, .progress-bar, .counter, .animated-value, .animated-element');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        if (entry.target.classList.contains('progress-bar')) {
+                            entry.target.style.width = entry.target.getAttribute('data-width') + '%';
+                        }
+                        const animateCounter = (el, isPercentage) => {
+                             const target = +el.getAttribute(isPercentage ? 'data-value' : 'data-target');
+                             const duration = 1500;
+                             let current = 0;
+                             const stepTime = Math.max(10, Math.floor(duration / target));
+                             const timer = setInterval(() => {
+                                 current += 1;
+                                 el.textContent = isPercentage ? current + '%' : current;
+                                 if (current >= target) {
+                                     el.textContent = isPercentage ? target + '%' : target;
+                                     clearInterval(timer);
+                                 }
+                             }, stepTime);
+                        };
+                        if (entry.target.classList.contains('counter')) animateCounter(entry.target, false);
+                        if (entry.target.classList.contains('animated-value')) animateCounter(entry.target, true);
+                        observer.unobserve(entry.target);
+                    }
                 });
-                // Tutup menu mobile setelah link di klik
-                if (!mobileMenu.classList.contains('hidden')) {
-                    mobileMenu.classList.add('hidden');
-                }
-            });
+            }, { threshold: 0.1 });
+            animatedElements.forEach(item => observer.observe(item));
         });
     </script>
-    <!-- Plugin Tailwind CSS untuk aspect-ratio -->
-    <script src="https://cdn.tailwindcss.com/nesting.js"></script>
-    <script>
-        tailwind.config = {
-          theme: {
-            extend: {
-              // ...
-            }
-          },
-          plugins: [
-            require('@tailwindcss/aspect-ratio'),
-            // ...
-          ],
-        }
-      </script>
-
 </body>
 </html>
-
