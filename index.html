@@ -17,9 +17,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom styles with new green theme */
         :root {
-            --rng-green: #1E5631; /* Deep, professional green */
+            --rng-green: #1E5631;
             --rng-light-green: #A4D0A4;
             --bs-primary: var(--rng-green);
             --bs-primary-rgb: 30, 86, 49;
@@ -28,7 +27,7 @@
         }
 
         [data-bs-theme="dark"] {
-             --bs-primary: #4CAF50; /* A brighter green for dark mode */
+             --bs-primary: #4CAF50;
              --bs-primary-rgb: 76, 175, 80;
              --bs-link-color: var(--bs-primary);
              --bs-link-hover-color: #6ed472;
@@ -37,17 +36,17 @@
              --bs-tertiary-bg: #1e1e1e;
         }
 
-        html {
-             scroll-behavior: smooth;
+        html { 
+            scroll-behavior: smooth;
         }
         
-        body {
+        /* === PERBAIKAN FINAL: MENGHENTIKAN SCROLL HORIZONTAL === */
+        html, body { 
             font-family: 'Poppins', sans-serif;
+            overflow-x: clip;
         }
         
-        .fw-bold.text-primary {
-            color: var(--bs-primary) !important;
-        }
+        .fw-bold.text-primary { color: var(--bs-primary) !important; }
 
         .hero-section {
             position: relative;
@@ -61,16 +60,8 @@
             justify-content: center;
             text-align: center;
         }
-        .hero-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-        .hero-section .container {
-            position: relative;
-            z-index: 2;
-        }
+        .hero-section::before { content: ''; position: absolute; inset: 0; background-color: rgba(0, 0, 0, 0.5); }
+        .hero-section .container { position: relative; z-index: 2; }
 
         .cta-section {
             background: linear-gradient(45deg, var(--rng-green), #28a745);
@@ -78,7 +69,7 @@
             color: white;
         }
 
-        /* Styling Timeline */
+        /* === PERBAIKAN FINAL: TIMELINE CSS === */
         .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
         .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--bs-border-color); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
         .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
@@ -88,8 +79,6 @@
         .timeline-icon {
             position: absolute;
             top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
             width: 50px;
             height: 50px;
             background-color: var(--bs-primary);
@@ -103,6 +92,13 @@
             font-size: 1.5rem;
         }
 
+        .timeline-container.left .timeline-icon {
+            right: -25px;
+        }
+        .timeline-container.right .timeline-icon {
+            left: -25px;
+        }
+
         .timeline-content {
             padding: 20px 30px;
             background-color: var(--bs-tertiary-bg);
@@ -113,10 +109,7 @@
             transform: translateY(50px);
             transition: all 0.4s ease;
         }
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--bs-box-shadow-lg) !important;
-        }
+        .timeline-content:hover { transform: translateY(-5px); box-shadow: var(--bs-box-shadow-lg) !important; }
         .timeline-content.is-visible { opacity: 1; transform: translateY(0); }
         
         .partner-logo { max-height: 60px; filter: grayscale(100%); opacity: 0.6; transition: all 0.3s ease; }
@@ -127,23 +120,16 @@
         .animated-element { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
         .animated-element.is-visible { opacity: 1; transform: translateY(0); }
 
-        /* Perbaikan Responsivitas */
         @media screen and (max-width: 768px) {
-            /* Kecilkan ukuran judul di mobile */
             .display-4 { font-size: 2.5rem; }
             .display-5 { font-size: 2.2rem; }
             .display-6 { font-size: 1.8rem; }
             
-            /* Ubah timeline menjadi satu kolom */
-            .timeline::after { left: 25px; }
-            .timeline-container { 
-                width: 100%; 
-                padding-left: 70px; 
-                padding-right: 15px; 
-            }
+            .timeline::after { left: 35px; }
+            .timeline-container { width: 100%; padding-left: 85px; padding-right: 15px; }
             .timeline-container.left, .timeline-container.right { left: 0%; }
-            .timeline-icon {
-                left: 25px;
+            .timeline-container .timeline-icon {
+                left: 10px;
             }
         }
     </style>
@@ -154,9 +140,8 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm sticky-top">
             <div class="container">
-                <!-- === PERUBAHAN DI SINI: MENAMBAHKAN LOGO === -->
                 <a class="navbar-brand d-flex align-items-center fw-bold text-primary" href="#">
-                    <img src="logo.png" alt="Rasyifa Nusantara Group Logo" style="height: 50px;" class="me-2">
+                    <img src="logo.png" alt="Rasyifa Nusantara Group Logo" style="height: 40px;" class="me-2">
                     Rasyifa Nusantara Group
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#main-nav" aria-controls="main-nav" aria-expanded="false" aria-label="Toggle navigation">
@@ -205,11 +190,46 @@
                     <p class="lead col-lg-7 mx-auto">Kualitas, inovasi, dan pertumbuhan berkelanjutan adalah pilar yang kami bangun sejak awal.</p>
                 </div>
                 <div class="timeline">
-                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-rocket"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2019 - Awal Mula</h3><p class="small">Rasyifa Nusantara Group didirikan dengan visi untuk menjadi pemain kunci dalam sektor jasa dan perdagangan.</p></div></div>
-                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-leaf"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2021 - Ekspansi Pertanian</h3><p class="small">Memasuki sektor pertanian dengan menerapkan teknologi modern untuk meningkatkan efisiensi dan hasil panen.</p></div></div>
-                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-industry"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2023 - Diversifikasi Usaha</h3><p class="small">Melakukan diversifikasi ke bidang peternakan dan industri pengolahan, menciptakan sinergi antar unit bisnis.</p></div></div>
-                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-desktop"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2024 - Digitalisasi Layanan</h3><p class="small">Meluncurkan platform digital terpadu untuk memudahkan akses layanan dan informasi bagi klien.</p></div></div>
-                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-globe"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2025 - Visi Ekspansi Global</h3><p class="small">Merencanakan ekspansi pasar nasional dan menjajaki kemitraan strategis global untuk membawa produk Indonesia ke dunia.</p></div></div>
+                    <!-- Item 1: 2019 -->
+                    <div class="timeline-container left">
+                        <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="fs-5 fw-bold text-primary">2019 - Awal Mula</h3>
+                            <p class="small">Rasyifa Nusantara Group didirikan dengan visi untuk menjadi pemain kunci dalam sektor jasa dan perdagangan, memulai langkah dengan fondasi yang kuat.</p>
+                        </div>
+                    </div>
+                    <!-- Item 2: 2021 -->
+                    <div class="timeline-container right">
+                        <div class="timeline-icon"><i class="fa fa-leaf"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="fs-5 fw-bold text-primary">2021 - Ekspansi Pertanian</h3>
+                            <p class="small">Memasuki sektor pertanian dengan menerapkan teknologi modern untuk meningkatkan efisiensi dan hasil panen, mendukung ketahanan pangan nasional.</p>
+                        </div>
+                    </div>
+                    <!-- Item 3: 2023 -->
+                    <div class="timeline-container left">
+                         <div class="timeline-icon"><i class="fa fa-industry"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="fs-5 fw-bold text-primary">2023 - Diversifikasi Usaha</h3>
+                            <p class="small">Melakukan diversifikasi ke bidang peternakan dan industri pengolahan, menciptakan sinergi antar unit bisnis untuk pertumbuhan yang solid dan terintegrasi.</p>
+                        </div>
+                    </div>
+                     <!-- Item 4: 2024 -->
+                    <div class="timeline-container right">
+                         <div class="timeline-icon"><i class="fa fa-desktop"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="fs-5 fw-bold text-primary">2024 - Digitalisasi Layanan</h3>
+                            <p class="small">Meluncurkan platform digital terpadu untuk memudahkan akses layanan dan informasi bagi klien, serta meningkatkan efisiensi operasional internal.</p>
+                        </div>
+                    </div>
+                     <!-- Item 5: 2025 -->
+                    <div class="timeline-container left">
+                         <div class="timeline-icon"><i class="fa fa-globe"></i></div>
+                        <div class="timeline-content">
+                            <h3 class="fs-5 fw-bold text-primary">2025 - Visi Ekspansi Global</h3>
+                            <p class="small">Merencanakan ekspansi pasar ke tingkat nasional dan menjajaki kemitraan strategis di tingkat global untuk membawa produk dan jasa unggulan Indonesia ke dunia.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -338,10 +358,12 @@
         
         <!-- Call to Action Section -->
         <section id="cta" class="cta-section">
-            <div class="container text-center">
-                <h2 class="display-5 fw-bold mb-3">Siap Mengembangkan Bisnis Anda?</h2>
-                <p class="lead mb-4 col-lg-8 mx-auto">Mari diskusikan bagaimana Rasyifa Nusantara Group dapat membantu mewujudkan visi dan target bisnis Anda. Hubungi kami untuk konsultasi awal tanpa biaya.</p>
-                <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-primary">Mulai Kolaborasi</a>
+            <div class="container">
+                <div class="text-center">
+                    <h2 class="display-5 fw-bold mb-3">Siap Mengembangkan Bisnis Anda?</h2>
+                    <p class="lead mb-4 col-lg-8 mx-auto">Mari diskusikan bagaimana Rasyifa Nusantara Group dapat membantu mewujudkan visi dan target bisnis Anda. Hubungi kami untuk konsultasi awal tanpa biaya.</p>
+                    <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-primary">Mulai Kolaborasi</a>
+                </div>
             </div>
         </section>
 
