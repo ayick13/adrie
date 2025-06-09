@@ -36,11 +36,8 @@
              --bs-tertiary-bg: #1e1e1e;
         }
 
-        html { 
-            scroll-behavior: smooth;
-        }
+        html { scroll-behavior: smooth; }
         
-        /* === PERBAIKAN FINAL: MENGHENTIKAN SCROLL HORIZONTAL === */
         html, body { 
             font-family: 'Poppins', sans-serif;
             overflow-x: clip;
@@ -69,7 +66,6 @@
             color: white;
         }
 
-        /* === PERBAIKAN FINAL: TIMELINE CSS === */
         .timeline { position: relative; max-width: 1200px; margin: 0 auto; }
         .timeline::after { content: ''; position: absolute; width: 3px; background-color: var(--bs-border-color); top: 0; bottom: 0; left: 50%; margin-left: -1.5px; }
         .timeline-container { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; }
@@ -92,12 +88,8 @@
             font-size: 1.5rem;
         }
 
-        .timeline-container.left .timeline-icon {
-            right: -25px;
-        }
-        .timeline-container.right .timeline-icon {
-            left: -25px;
-        }
+        .timeline-container.left .timeline-icon { right: -25px; }
+        .timeline-container.right .timeline-icon { left: -25px; }
 
         .timeline-content {
             padding: 20px 30px;
@@ -128,9 +120,7 @@
             .timeline::after { left: 35px; }
             .timeline-container { width: 100%; padding-left: 85px; padding-right: 15px; }
             .timeline-container.left, .timeline-container.right { left: 0%; }
-            .timeline-container .timeline-icon {
-                left: 10px;
-            }
+            .timeline-container .timeline-icon { left: 10px; }
         }
     </style>
 </head>
@@ -190,46 +180,11 @@
                     <p class="lead col-lg-7 mx-auto">Kualitas, inovasi, dan pertumbuhan berkelanjutan adalah pilar yang kami bangun sejak awal.</p>
                 </div>
                 <div class="timeline">
-                    <!-- Item 1: 2019 -->
-                    <div class="timeline-container left">
-                        <div class="timeline-icon"><i class="fa fa-rocket"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="fs-5 fw-bold text-primary">2019 - Awal Mula</h3>
-                            <p class="small">Rasyifa Nusantara Group didirikan dengan visi untuk menjadi pemain kunci dalam sektor jasa dan perdagangan, memulai langkah dengan fondasi yang kuat.</p>
-                        </div>
-                    </div>
-                    <!-- Item 2: 2021 -->
-                    <div class="timeline-container right">
-                        <div class="timeline-icon"><i class="fa fa-leaf"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="fs-5 fw-bold text-primary">2021 - Ekspansi Pertanian</h3>
-                            <p class="small">Memasuki sektor pertanian dengan menerapkan teknologi modern untuk meningkatkan efisiensi dan hasil panen, mendukung ketahanan pangan nasional.</p>
-                        </div>
-                    </div>
-                    <!-- Item 3: 2023 -->
-                    <div class="timeline-container left">
-                         <div class="timeline-icon"><i class="fa fa-industry"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="fs-5 fw-bold text-primary">2023 - Diversifikasi Usaha</h3>
-                            <p class="small">Melakukan diversifikasi ke bidang peternakan dan industri pengolahan, menciptakan sinergi antar unit bisnis untuk pertumbuhan yang solid dan terintegrasi.</p>
-                        </div>
-                    </div>
-                     <!-- Item 4: 2024 -->
-                    <div class="timeline-container right">
-                         <div class="timeline-icon"><i class="fa fa-desktop"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="fs-5 fw-bold text-primary">2024 - Digitalisasi Layanan</h3>
-                            <p class="small">Meluncurkan platform digital terpadu untuk memudahkan akses layanan dan informasi bagi klien, serta meningkatkan efisiensi operasional internal.</p>
-                        </div>
-                    </div>
-                     <!-- Item 5: 2025 -->
-                    <div class="timeline-container left">
-                         <div class="timeline-icon"><i class="fa fa-globe"></i></div>
-                        <div class="timeline-content">
-                            <h3 class="fs-5 fw-bold text-primary">2025 - Visi Ekspansi Global</h3>
-                            <p class="small">Merencanakan ekspansi pasar ke tingkat nasional dan menjajaki kemitraan strategis di tingkat global untuk membawa produk dan jasa unggulan Indonesia ke dunia.</p>
-                        </div>
-                    </div>
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-rocket"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2019 - Awal Mula</h3><p class="small">Rasyifa Nusantara Group didirikan dengan visi untuk menjadi pemain kunci dalam sektor jasa dan perdagangan.</p></div></div>
+                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-leaf"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2021 - Ekspansi Pertanian</h3><p class="small">Memasuki sektor pertanian dengan menerapkan teknologi modern untuk meningkatkan efisiensi dan hasil panen.</p></div></div>
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-industry"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2023 - Diversifikasi Usaha</h3><p class="small">Melakukan diversifikasi ke bidang peternakan dan industri pengolahan, menciptakan sinergi antar unit bisnis.</p></div></div>
+                    <div class="timeline-container right"><div class="timeline-icon"><i class="fa fa-desktop"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2024 - Digitalisasi Layanan</h3><p class="small">Meluncurkan platform digital terpadu untuk memudahkan akses layanan dan informasi bagi klien.</p></div></div>
+                    <div class="timeline-container left"><div class="timeline-icon"><i class="fa fa-globe"></i></div><div class="timeline-content"><h3 class="fs-5 fw-bold text-primary">2025 - Visi Ekspansi Global</h3><p class="small">Merencanakan ekspansi pasar nasional dan menjajaki kemitraan strategis global untuk membawa produk Indonesia ke dunia.</p></div></div>
                 </div>
             </div>
         </section>
@@ -275,6 +230,12 @@
                     <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="pertanian-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/smart%20farming%20with%20drones%20watering%20lush%20green%20paddy%20field,%20innovation&model=flux&nologo=true" class="img-fluid rounded" alt="Agrikultur Inovatif"></div><div class="col-md-8"><h3 class="fw-bold text-success">Agrikultur Inovatif</h3><p>Dengan fokus pada pertanian cerdas (smart farming), kami mengelola lahan pertanian untuk menghasilkan komoditas berkualitas tinggi dan ramah lingkungan.</p></div></div></div>
                     <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="peternakan-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/healthy%20cows%20and%20goats%20on%20a%20modern%20clean%20farm,%20green%20pasture&model=flux&nologo=true" class="img-fluid rounded" alt="Peternakan Terpadu"></div><div class="col-md-8"><h3 class="fw-bold text-warning">Peternakan Terpadu</h3><p>Unit peternakan kami berfokus pada pembibitan dan penggemukan ternak unggul dengan menerapkan standar kesejahteraan hewan yang tinggi.</p></div></div></div>
                     <div class="tab-pane fade p-4 rounded-3 bg-body shadow-sm" id="industri-pane" role="tabpanel"><div class="row align-items-center"><div class="col-md-4 mb-3 mb-md-0"><img src="https://image.pollinations.ai/prompt/clean%20modern%20food%20processing%20facility,%20stainless%20steel%20machinery&model=flux&nologo=true" class="img-fluid rounded" alt="Industri Pengolahan"></div><div class="col-md-8"><h3 class="fw-bold text-info">Industri Pengolahan Hilir</h3><p>Kami mengolah hasil pertanian dan peternakan menjadi produk bernilai tambah, dilengkapi dengan teknologi modern untuk memastikan kualitas produk akhir.</p></div></div></div>
+                </div>
+                <!-- Tombol Unduh Katalog Layanan -->
+                <div class="text-center mt-5 animated-element">
+                    <a href="katalog.pdf" class="btn btn-outline-primary btn-lg rounded-pill px-4" download>
+                        <i class="fa fa-download me-2"></i> Unduh Katalog Layanan
+                    </a>
                 </div>
             </div>
         </section>
@@ -358,11 +319,16 @@
         
         <!-- Call to Action Section -->
         <section id="cta" class="cta-section">
-            <div class="container">
-                <div class="text-center">
-                    <h2 class="display-5 fw-bold mb-3">Siap Mengembangkan Bisnis Anda?</h2>
-                    <p class="lead mb-4 col-lg-8 mx-auto">Mari diskusikan bagaimana Rasyifa Nusantara Group dapat membantu mewujudkan visi dan target bisnis Anda. Hubungi kami untuk konsultasi awal tanpa biaya.</p>
-                    <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-primary">Mulai Kolaborasi</a>
+            <div class="container text-center">
+                <h2 class="display-5 fw-bold mb-3">Siap Mengembangkan Bisnis Anda?</h2>
+                <p class="lead mb-4 col-lg-8 mx-auto">Mari diskusikan bagaimana Rasyifa Nusantara Group dapat membantu mewujudkan visi dan target bisnis Anda. Hubungi kami atau unduh profil lengkap kami.</p>
+                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
+                    <a href="#contact" class="btn btn-light btn-lg rounded-pill px-4 py-2 fw-bold text-primary">
+                        Mulai Kolaborasi
+                    </a>
+                    <a href="profil-perusahaan.pdf" class="btn btn-outline-light btn-lg rounded-pill px-4 py-2" download>
+                        <i class="fa fa-file-pdf-o me-2"></i> Unduh Profil PDF
+                    </a>
                 </div>
             </div>
         </section>
